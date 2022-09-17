@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block main %}
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Test Results</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5>Detailed Analysis:</h5>
+                <div>Input Url: <span id="urs"></span></div>
+                <div>Have_IP: <span id="Have_IP1"></span></div>
+                <div>Have_At: <span id="Have_At1"></span></div>
+                <div>URL_Length: <span id="URL_Length1"></span></div>
+                <div>URL_Depth: <span id="URL_Depth1"></span></div>
+                <div>Redirection: <span id="Redirection1"></span></div>
+                <div>https_Domain: <span id="https_Domain1"></span></div>
+                <div>TinyURL: <span id="TinyURL1"></span></div>
+                <div>Prefix_Suffix: <span id="Prefix_Suffix1"></span></div>
+                <div>DNS_Record: <span id="DNS_Record1"></span></div>
+                <div>Web_Traffic: <span id="Web_Traffic1"></span></div>
+                <div>Domain_Age: <span id="Domain_Age1"></span></div>
+                <div>Domain_End: <span id="Domain_End1"></span></div>
+                <div>iFrame: <span id="iFrame1"></span></div>
+                <div>Mouse_Over: <span id="Mouse_Over1"></span></div>
+                <div>Right_Click: <span id="Right_Click1"></span></div>
+                <div>Web_Forwards: <span id="Web_Forwards1"></span></div>
+                <h5 class="pt-3">Verdict:</h5>
+                <div id="prediction"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a class="btn btn-primary" href="/results" role="button">View DB</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container pt-5">
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <h3>Test Url</h3>
+            <form action="" id="post-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="url" class="form-control" id="url_input" placeholder="" required>
+                </div>
+                <button type="submit" value="Submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).on('submit', '#post-form',function(e){
+        e.preventDefault();
+        $.ajax({
+            type:'POST',
+            url:'{% url "antphishing:submit_prediction" %}',
+            data:{
+                url_input:$('#url_input').val(),
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                action: 'post'
+            },
+            success:function(json) {
+                document.forms["post-form"].reset();
+                document.getElementById("prediction").innerHTML = json['result']
+                document.getElementById("urs").innerHTML = json['Domain']
+                document.getElementById("Have_IP1").innerHTML = json['Have_IP']
+                document.getElementById("Have_At1").innerHTML = json['Have_At']
+                document.getElementById("URL_Length1").innerHTML = json['URL_Length']
+                document.getElementById("URL_Depth1").innerHTML = json['URL_Depth']
+                document.getElementById("Redirection1").innerHTML = json['Redirection']
+                document.getElementById("https_Domain1").innerHTML = json['https_Domain']
+                document.getElementById("TinyURL1").innerHTML = json['TinyURL']
+                document.getElementById("Prefix_Suffix1").innerHTML = json['Prefix_Suffix']
+                document.getElementById("DNS_Record1").innerHTML = json['DNS_Record']
+                document.getElementById("Web_Traffic1").innerHTML = json['Web_Traffic']
+                document.getElementById("Domain_Age1").innerHTML = json['Domain_Age']
+                document.getElementById("Domain_End1").innerHTML = json['Domain_End']
+                document.getElementById("iFrame1").innerHTML = json['iFrame']
+                document.getElementById("Mouse_Over1").innerHTML = json['Mouse_Over']
+                document.getElementById("Right_Click1").innerHTML = json['Right_Click']
+                document.getElementById("Web_Forwards1").innerHTML = json['Web_Forwards']
+            },
+            error : function(xhr,errmsg,err) {
+
+            }
+        });
+    })
+</script>
+
+{% endblock %}

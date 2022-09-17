@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block main %}
+    <div class="container pt-5">
+        <div class="row">
+
+        <h1>Legitimate URLs</h1>
+
+            <table class="table">
+                <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Domain</th>
+                <th scope="col">Have_IP</th>
+                <th scope="col">Have_At</th>
+                <th scope="col">URL_Length</th>
+                <th scope="col">URL_Depth</th>
+                <th scope="col">Redirection</th>
+                <th scope="col">https_Domain</th>
+                <th scope="col">TinyURL</th>
+                <th scope="col">Prefix_Suffix</th>
+                <th scope="col">DNS_Record</th>
+                <th scope="col">Web_Traffic</th>
+                <th scope="col">Domain_Age</th>
+                <th scope="col">Domain_End</th>
+                <th scope="col">iFrame</th>
+                <th scope="col">Mouse_Over</th>
+                <th scope="col">Right_Click</th>
+                <th scope="col">Web_Forwards</th>
+                <th scope="col">Label</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for data_leg in dataset1 %}
+                    <tr>
+                    <th scope="row">{{ data_leg.id }}</th>
+                    <td>{{ data_leg.Domain }}</td>
+                    <td>{{ data_leg.Have_IP }}</td>
+                    <td>{{ data_leg.Have_At }}</td>
+                    <td>{{ data_leg.URL_Length }}</td>
+                    <td>{{ data_leg.URL_Depth }}</td>
+                    <td>{{ data_leg.Redirection }}</td>
+                    <td>{{ data_leg.https_Domain }}</td>
+                    <td>{{ data_leg.TinyURL }}</td>
+                    <td>{{ data_leg.Prefix_Suffix }}</td>
+                    <td>{{ data_leg.DNS_Record }}</td>
+                    <td>{{ data_leg.Web_Traffic }}</td>
+                    <td>{{ data_leg.Domain_Age }}</td>
+                    <td>{{ data_leg.Domain_End }}</td>
+                    <td>{{ data_leg.iFrame }}</td>
+                    <td>{{ data_leg.Mouse_Over }}</td>
+                    <td>{{ data_leg.Right_Click }}</td>
+                    <td>{{ data_leg.Web_Forwards }}</td>
+                    <td>{{ data_leg.Label }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

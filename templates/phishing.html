@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block main %}
+    <div class="container pt-5">
+        <div class="row">
+
+        <h1>Phishing URLs</h1>
+
+            <table class="table">
+                <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Domain</th>
+                <th scope="col">Have_IP</th>
+                <th scope="col">Have_At</th>
+                <th scope="col">URL_Length</th>
+                <th scope="col">URL_Depth</th>
+                <th scope="col">Redirection</th>
+                <th scope="col">https_Domain</th>
+                <th scope="col">TinyURL</th>
+                <th scope="col">Prefix_Suffix</th>
+                <th scope="col">DNS_Record</th>
+                <th scope="col">Web_Traffic</th>
+                <th scope="col">Domain_Age</th>
+                <th scope="col">Domain_End</th>
+                <th scope="col">iFrame</th>
+                <th scope="col">Mouse_Over</th>
+                <th scope="col">Right_Click</th>
+                <th scope="col">Web_Forwards</th>
+                <th scope="col">Label</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for data_phis in dataset2 %}
+                    <tr>
+                    <th scope="row">{{ data_phis.id }}</th>
+                    <td>{{ data_phis.Domain }}</td>
+                    <td>{{ data_phis.Have_IP }}</td>
+                    <td>{{ data_phis.Have_At }}</td>
+                    <td>{{ data_phis.URL_Length }}</td>
+                    <td>{{ data_phis.URL_Depth }}</td>
+                    <td>{{ data_phis.Redirection }}</td>
+                    <td>{{ data_phis.https_Domain }}</td>
+                    <td>{{ data_phis.TinyURL }}</td>
+                    <td>{{ data_phis.Prefix_Suffix }}</td>
+                    <td>{{ data_phis.DNS_Record }}</td>
+                    <td>{{ data_phis.Web_Traffic }}</td>
+                    <td>{{ data_phis.Domain_Age }}</td>
+                    <td>{{ data_phis.Domain_End }}</td>
+                    <td>{{ data_phis.iFrame }}</td>
+                    <td>{{ data_phis.Mouse_Over }}</td>
+                    <td>{{ data_phis.Right_Click }}</td>
+                    <td>{{ data_phis.Web_Forwards }}</td>
+                    <td>{{ data_phis.Label }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
