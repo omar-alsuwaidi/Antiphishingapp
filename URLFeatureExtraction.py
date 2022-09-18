@@ -4,6 +4,7 @@
 from urllib.parse import urlparse, urlencode
 import ipaddress
 import re
+import socket
 
 """#### **3.1.1. Domain of the URL**
 Here, we are just extracting the domain present in the URL. This feature doesn't have much significance in the training.
@@ -31,7 +32,7 @@ If the domain part of URL has IP address, the value assigned to this feature is 
 
 def havingIP(url):
   try:
-    ipaddress.ip_address(url)
+    socket.gethostbyname(url)
     ip = 1
   except:
     ip = 0
